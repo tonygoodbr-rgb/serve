@@ -1,0 +1,98 @@
+/* --- CONFIGURAÇÕES BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none; /* Impede selecionar texto ao clicar nos botões */
+}
+
+body {
+    overflow: hidden;
+    background-color: #000;
+    touch-action: none; /* Melhora a resposta do toque no celular */
+    font-family: sans-serif;
+}
+
+#mundo {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("grama (1).png");
+    background-repeat: repeat;
+    position: relative;
+}
+
+#player {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("personagem 1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent; /* Garante que o quadrado azul não apareça */
+    z-index: 10;
+}
+
+/* --- INTERFACE DE CONTROLE (JOYSTICK) --- */
+#ui-touch {
+    display: none; /* Escondido por padrão no computador */
+    position: fixed;
+    z-index: 100;
+}
+
+/* --- DESIGN PARA CELULAR (APARECE APENAS DEITADO) --- */
+@media (max-width: 900px) and (orientation: landscape) {
+    #ui-touch {
+        display: block;
+        bottom: 20px;
+        left: 20px;
+    }
+    .btn-joy {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid #fff;
+        border-radius: 12px;
+        color: white;
+        font-size: 24px;
+    }
+}
+
+/* --- DESIGN PARA TABLET (BOTÕES MAIORES E AZUIS) --- */
+@media (min-width: 901px) and (max-width: 1280px) {
+    #ui-touch {
+        display: block;
+        bottom: 50px;
+        left: 50px;
+    }
+    .btn-joy {
+        width: 95px;
+        height: 95px;
+        background: rgba(0, 200, 255, 0.2);
+        border: 3px solid #00c8ff;
+        border-radius: 50%;
+        color: #00c8ff;
+        font-size: 40px;
+    }
+}
+
+/* --- AVISO PARA VIRAR O CELULAR (QUANDO EM PÉ) --- */
+#aviso-orientacao {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #111; color: #fff;
+    justify-content: center; align-items: center;
+    z-index: 9999; text-align: center; padding: 20px;
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+    #aviso-orientacao { display: flex; }
+}
+
+/* Organização visual dos botões do joystick */
+.direcionais { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.meio { display: flex; gap: 8px; }
